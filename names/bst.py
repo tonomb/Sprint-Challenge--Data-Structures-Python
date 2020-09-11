@@ -13,10 +13,12 @@ class BSTNode:
         self.value = value
         self.left = None
         self.right = None
+        self.length = 0
 
     # Insert the given value into the tree
     def insert(self, value):
         # left case?
+        self.length += 1
         # check if the value is less than the root value?
         if value < self.value:
             # move to the left and check if it is none?
@@ -213,4 +215,27 @@ class BSTNode:
             print(self.value)
         return
 
+    def duplicates(self):
+        dup = []
 
+    # instantiate a queue
+        q = []
+        # enqueue our starting node (self)
+        q.append(self)
+        # while the queue is not empty
+        while len(q) > 0:
+            # dequeue the current node
+            node = q.pop(0)
+            # check if left child exists
+            if node.left:
+                if node.value == node.left.value:
+                    dup.append(node.value)
+                # enqueue left child
+                q.append(node.left)
+            # check if right child exists
+            if node.right:
+                if node.value == node.right.value:
+                    dup.append(node.value)
+                # enqueue right child
+                q.append(node.right)
+        return dup
